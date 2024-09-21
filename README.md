@@ -16,7 +16,7 @@ This project builds a scalable data pipeline for IoT devices by leveraging AWS s
 
 - [ ] -> **Data Analytics**: Load the transformed data into Amazon Redshift for advanced querying and analytics.
 
-- [ ] -> **Project Extension**:
+
 
 - [ ] -> **AWS CDK**: Automate the infrastructure provisioning using AWS CDK.
 
