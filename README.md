@@ -5,18 +5,17 @@
 
   
 
-This project builds a scalable data pipeline for IoT devices by leveraging AWS services. The steps include:
+Builds a scalable data pipeline for IoT devices by leveraging AWS services.
 
-  
+  ![Alt text](draw.io/DeviceSDK.png)
 
- - [ ] -> **Data Extraction**: Utilize the Device SDK's API to extract raw IoT data.
+
+ - [ ] -> **Data Extraction**: Device SDK's API to extract raw IoT data.
 - [ ] -> **Data Storage**: Orchestrate the data ingestion process using Apache Airflow, storing the extracted data in an S3 bucket.
 
 - [ ] -> **Data Transformation**: Process and transform the raw data using AWS Glue and Amazon Athena.
 
 - [ ] -> **Data Analytics**: Load the transformed data into Amazon Redshift for advanced querying and analytics.
-
-
 
 - [ ] -> **AWS CDK**: Automate the infrastructure provisioning using AWS CDK.
 
@@ -30,8 +29,8 @@ This project builds a scalable data pipeline for IoT devices by leveraging AWS s
 
   
 
-This project enables seamless management of IoT device states via AWS IoT Device Shadow. It consists of:
-
+Enables management of IoT device states via AWS IoT Device Shadow.
+ ![Alt text](draw.io/StateE2E.png)
   
 
 - [ ] -> **State Orchestration**: Use the SDK to handle app requests for the current state or state changes, interacting with IoT device state management.
