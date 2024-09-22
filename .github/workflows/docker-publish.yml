@@ -1,35 +1,25 @@
-version: '3.8'
-services:
-  airflow-webserver:
-    image: ghcr.io/aliyevom/iot-project:latest
-    container_name: airflow_webserver
-    ports:
-      - "8080:8080"
-    environment:
-      - AIRFLOW__CORE__LOAD_EXAMPLES=False
-      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
-    volumes:
-      - ./dags:/usr/local/airflow/dags  
-      - ./logs:/usr/local/airflow/logs  
-      - ./plugins:/usr/local/airflow/plugins  
-    command: bash -c "airflow webserver" 
-    restart: always
+name: Publish Docker image
 
-  airflow-scheduler:
-    image: ghcr.io/aliyevom/iot-project:latest
-    container_name: airflow_scheduler
-    depends_on:
-      - airflow-webserver  
-    volumes:
-      - ./dags:/usr/local/airflow/dags
-      - ./logs:/usr/local/airflow/logs
-      - ./plugins:/usr/local/airflow/plugins
-    command: bash -c "airflow scheduler"  
-    restart: always
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
 
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - "6379:6379"
-    restart: always
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push the Docker image
+        run: |
+          docker build -t ghcr.io/aliyevom/iot-project:latest ./docker  # Adjusted for Dockerfile in the "docker" directory
+          docker push ghcr.io/aliyevom/iot-project:latest
