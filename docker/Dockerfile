@@ -22,8 +22,6 @@ RUN apt-get update && apt-get install -y \
 # Copy project files
 COPY . /app
 
-# Install Python project dependencies
-RUN pip install -r requirements.txt
 
 # Expose port for Airflow webserver
 EXPOSE 8080
