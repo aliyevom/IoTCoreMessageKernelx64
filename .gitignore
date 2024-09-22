@@ -1,0 +1,14 @@
+.DS_Store
+
+# Ignore Python cache and log files (if applicable)
+__pycache__/
+*.pyc
+*.log
+
+# Ignore any virtual environments
+venv/
+.env/
+
+# Ignore IDE-specific files (if you're using VSCode or any other IDE)
+.vscode/
+.idea/
