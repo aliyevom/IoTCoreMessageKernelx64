@@ -12,7 +12,6 @@ class DeviceCoreSDK:
         self.retry_delay = retry_delay
 
     def fetch_data(self):
-       
         retries = 0
         while retries < self.max_retries:
             try:
@@ -20,7 +19,10 @@ class DeviceCoreSDK:
                 response.raise_for_status()
                 logger.info("Successfully fetched data from device SDK.")
                 return response.json()
-
+            except requests.exceptions.Timeout:
+                retries += 1
+                logger.warning(f"Timeout occurred. Retry {retries}/{self.max_retries}...")
+                sleep(self.retry_delay)
             except requests.exceptions.RequestException as e:
                 logger.error(f"Error fetching data from device SDK: {e}")
                 return None
