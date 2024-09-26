@@ -15,7 +15,7 @@ default_args = {
 }
 
 # DAG definition for IoT Core Data Pipeline
-with DAG('iot_core_data_pipeline',
+with DAG('iot_core_data_pipeline','iot_core_pipeline_with_kinesis',
          default_args=default_args,
          schedule_interval='@daily',
          catchup=False) as dag:
@@ -26,11 +26,17 @@ with DAG('iot_core_data_pipeline',
         retries=2,
         retry_delay=timedelta(minutes=3)
     )
+
     athena_query_task = PythonOperator(
         task_id='run_athena_query',
         python_callable=run_athena_query,
         retries=2,
         retry_delay=timedelta(minutes=3)
     )
-
-    extract_and_store_task
+    kinesis_producer_task = PythonOperator(
+        task_id='send_data_to_kinesis',
+        python_callable=send_data_to_kinesis,
+        retries=2,
+        retry_delay=timedelta(minutes=3)
+    )
+    
