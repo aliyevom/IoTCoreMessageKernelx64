@@ -21,7 +21,7 @@ def send_notification(message):
   
     sns_client = boto3.client('sns')
     sns_client.publish(
-        TopicArn='arn:aws:sns:us-east-1:123456789012:IoTAlerts',
+        TopicArn='arn:aws:sns:us-east-1:211551251112:IoTAlerts',
         Message=message,
         Subject="IoT Device Alert"
     )

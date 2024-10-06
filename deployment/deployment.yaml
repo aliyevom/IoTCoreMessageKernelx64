@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-signalIoT
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-signalIoT
+  template:
+    metadata:
+      labels:
+        app: api-signalIoT
+    spec:
+      containers:
+      - name: api-signalIoT
+        image: api-signalIoTapi:latest 
+        ports:
+        - containerPort: 8080
+        env:
+        - name: CACHE_TTL
+          value: "60" 
