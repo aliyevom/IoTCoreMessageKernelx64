@@ -16,7 +16,7 @@ def store_data_in_s3():
     
         s3_client = boto3.client('s3')
         try:
-            logger.info(f"Uploading data to S3 bucket {BsUCKET_NAME}...")
+            logger.info(f"Uploading data to S3 bucket {BUCKET_NAME}...")
             response = s3_client.put_object(
                 Bucket=BUCKET_NAME,
                 Key=S3_KEY,
